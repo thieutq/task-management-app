@@ -105,6 +105,22 @@ function ResponsiveAppBar() {
               </MenuItem>
 
               {!!user?.role &&
+                [RoleEnum.ADMIN, RoleEnum.EMPLOYEE, RoleEnum.EMPLOYER].includes(
+                  Number(user?.role?.id)
+                ) && [
+                  <MenuItem
+                    key="users"
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    href="/tasks"
+                  >
+                    <Typography textAlign="center">
+                      {t("common:navigation.tasks")}
+                    </Typography>
+                  </MenuItem>,
+                  // mobile-menu-items
+                ]}
+              {!!user?.role &&
                 [RoleEnum.ADMIN].includes(Number(user?.role?.id)) && [
                   <MenuItem
                     key="users"
@@ -173,6 +189,23 @@ function ResponsiveAppBar() {
             >
               {t("common:navigation.home")}
             </Button>
+
+            {!!user?.role &&
+              [RoleEnum.ADMIN, RoleEnum.EMPLOYEE, RoleEnum.EMPLOYER].includes(
+                Number(user?.role?.id)
+              ) && (
+                <>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                    component={Link}
+                    href="/tasks"
+                  >
+                    {t("common:navigation.tasks")}
+                  </Button>
+                  {/* desktop-menu-items */}
+                </>
+              )}
 
             {!!user?.role &&
               [RoleEnum.ADMIN].includes(Number(user?.role?.id)) && (
