@@ -6,6 +6,9 @@ export enum TaskStatusEnum {
   COMPLETED = "Completed",
 }
 
+export type Employee = Pick<User, "id" | "firstName" | "lastName">;
+export type Employer = Pick<User, "id" | "firstName" | "lastName">;
+
 export type Task = {
   id: number;
   title: string;
@@ -13,32 +16,11 @@ export type Task = {
   status: TaskStatusEnum;
   createdAt: Date;
   dueDate?: Date;
-  assignee?: User;
-  createdBy: User;
+  assignee?: Employee;
+  createdBy: Employer;
 };
 
-export type CreateTaskDto = {
-  title: string;
-  description?: string;
-  assigneeId: number;
-  dueDate?: Date;
-};
-
-export type UpdateTaskStatusDto = {
-  status: TaskStatusEnum;
-};
-
-export type QueryTaskDto = {
-  assigneeId?: number;
-  status?: TaskStatusEnum;
-  sortBy?: "createdAt" | "dueDate" | "status";
-  order?: "ASC" | "DESC";
-  page?: number;
-  limit?: number;
-};
-
-export type EmployeeTaskSummaryDto = {
-  employeeId: number;
+export type TaskSummary = Employee & {
   totalTasks: number;
   completedTasks: number;
 };
